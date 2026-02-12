@@ -1,0 +1,16 @@
+- name: Stop, remove, and recreate containers
+  shell: |
+    docker ps -q | xargs -r docker stop
+    docker ps -aq | xargs -r docker rm
+    docker compose -f "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/docker-compose.yml" up -d
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid"
+
+- name: Check containers state
+  shell: docker ps
+  register: docker_output
+
+- name: Show running containers
+  debug:
+    var: docker_output.stdout

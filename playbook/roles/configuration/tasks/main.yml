@@ -1,0 +1,26 @@
+- name: Create grid-router directory
+  file:
+    path: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/grid-router"
+    state: directory
+    mode: '0755'
+    recurse: yes
+
+- name: Create browsers.json file
+  template:
+    src: browsers.json.j2
+    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/browsers.json"
+
+- name: Copy grid-router quota xml file
+  template:
+    src: vardan.xml.j2
+    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/grid-router/quota/vardan.xml"
+
+- name: Copy selenoid.conf template
+  template:
+    src: selenoid.config.j2
+    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/nginx/selenoid.conf"
+
+- name: Copy docker-compose.yml template
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/docker-compose.yml"

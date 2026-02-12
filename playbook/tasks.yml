@@ -1,0 +1,13 @@
+- hosts: localhost
+
+  vars:
+    browsers_versions:
+      chrome: "128.0"
+      firefox: "122.0"
+      selenoid_net1: selenoid_net1
+      selenoid_net2: selenoid_net2
+
+  roles:
+    - configuration
+    - docker_install
+    - docker_compose
