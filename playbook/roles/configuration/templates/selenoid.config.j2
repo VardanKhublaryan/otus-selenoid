@@ -1,12 +1,7 @@
 # Upstreams
 upstream selenoid_ui {
     random;
-    server selenoid-ui:8080;
-}
-
-upstream ggr {
-    random;
-    server ggr:4444;
+    server selenoid-ui;
 }
 
 server {
@@ -60,7 +55,7 @@ server {
     }
 
     location /wd/hub/ {
-        proxy_pass http://ggr$request_uri;
+        proxy_pass http://ggr;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
