@@ -8,7 +8,7 @@
 - name: Create browsers.json file
   template:
     src: browsers.json.j2
-    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/browsers.json"
+    dest: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/grid-router/browsers.json"
 
 - name: Copy grid-router quota xml file
   template:

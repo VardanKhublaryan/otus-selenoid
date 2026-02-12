@@ -8,7 +8,6 @@
         "path": "/",
         "platform": "linux/amd64",
         "video": true
-
       },
       "127.0": {
         "image": "selenoid/chrome:127.0",
@@ -16,7 +15,18 @@
         "path": "/",
         "platform": "linux/amd64",
         "video": true
-
+      }
+    }
+  },
+  "firefox": {
+    "default": "122.0",
+    "versions": {
+      "122.0": {
+        "image": "selenoid/firefox:122.0",
+        "port": "4444",
+        "path": "/",
+        "platform": "linux/amd64",
+        "video": true
       }
     }
   }
