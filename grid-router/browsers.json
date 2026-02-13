@@ -9,8 +9,8 @@
         "platform": "linux/amd64",
         "video": true
       },
-      "127.0": {
-        "image": "selenoid/chrome:127.0",
+      "128.0": {
+        "image": "selenoid/chrome:128.0",
         "port": "4444",
         "path": "/",
         "platform": "linux/amd64",
@@ -22,9 +22,9 @@
     "default": "122.0",
     "versions": {
       "122.0": {
-        "image": "selenoid/firefox:122.0",
+        "image": "selenoid/vnc_firefox:122.0",
         "port": "4444",
-        "path": "/",
+        "path": "/wd/hub",
         "platform": "linux/amd64",
         "video": true
       }

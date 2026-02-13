@@ -9,7 +9,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./grid-router/browsers.json:/etc/selenoid/browsers.json:ro
-    command: -container-network selenoid_net1 -limit 10
+    command: -container-network selenoid_net1 -limit 6 -timeout 2m
 
   selenoid2:
     image: aerokube/selenoid:1.11.3
@@ -20,13 +20,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./grid-router/browsers.json:/etc/selenoid/browsers.json:ro
-    command: -container-network selenoid_net2 -limit 10
+    command: -container-network selenoid_net2 -limit 6 -timeout 2m
+
+  wiremock:
+    image: wiremock/wiremock:3.13.1
+    hostname: wiremock
+    ports:
+        - "8081:8080"
+    volumes:
+        - "${PWD}/wiremock/stubs:/home/wiremock/mappings"
+    networks:
+        - selenoid_net1
 
   ggr:
     image: aerokube/ggr:1.7.2
     container_name: ggr
     hostname: ggr
-    platform: linux/amd64
     ports:
       - "4444:4444"
     depends_on:
@@ -43,7 +52,6 @@ services:
     image: aerokube/ggr-ui:1.2.0
     container_name: ggr-ui
     hostname: ggr-ui
-    platform: linux/amd64
     depends_on:
       - ggr
     volumes:
@@ -56,7 +64,6 @@ services:
     image: aerokube/selenoid-ui:1.10.11
     container_name: selenoid-ui
     hostname: selenoid-ui
-    platform: linux/amd64
     ports:
       - "8080:8080"
     depends_on:
