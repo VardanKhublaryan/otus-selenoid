@@ -9,7 +9,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./grid-router/browsers.json:/etc/selenoid/browsers.json:ro
-    command: -container-network selenoid_net1 -limit 6 -timeout 2m
+    command: -container-network selenoid_net1 -limit 10 -timeout 2m
 
   selenoid2:
     image: aerokube/selenoid:1.11.3
@@ -20,7 +20,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./grid-router/browsers.json:/etc/selenoid/browsers.json:ro
-    command: -container-network selenoid_net2 -limit 6 -timeout 2m
+    command: -container-network selenoid_net2 -limit 10 -timeout 2m
+
 
   wiremock:
     image: wiremock/wiremock:3.13.1
@@ -31,6 +32,22 @@ services:
         - "${PWD}/wiremock/stubs:/home/wiremock/mappings"
     networks:
         - selenoid_net1
+
+  android-container:
+    image: butomo1989/docker-android-x86-7.1.1
+    container_name: android-container
+    privileged: true
+    ports:
+      - "6080:6080"
+      - "5554:5554"
+      - "5555:5555"
+      - "4723:4723"
+    environment:
+      - WEB_VNC=false
+      - APPIUM=true
+    volumes:
+      - /home/vardan/wishlist.apk:/root/tmp/wishlist.apk
+    restart: unless-stopped
 
   ggr:
     image: aerokube/ggr:1.7.2

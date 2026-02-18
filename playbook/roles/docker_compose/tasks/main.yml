@@ -2,10 +2,10 @@
   shell: |
     docker ps -q | xargs -r docker stop
     docker ps -aq | xargs -r docker rm
-    docker compose -f "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid/docker-compose.yml" up -d
+    docker compose -f "{{ ansible_user_dir }}/otus-selenoid/docker-compose.yml" up -d
   args:
     executable: /bin/bash
-    chdir: "{{ ansible_user_dir }}/IdeaProjects/otus-selenoid"
+    chdir: "{{ ansible_user_dir }}/otus-selenoid"
 
 - name: Check containers state
   shell: docker ps
