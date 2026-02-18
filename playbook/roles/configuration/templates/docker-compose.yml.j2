@@ -33,7 +33,7 @@ services:
     networks:
         - selenoid_net1
 
-  android-container:
+ android-container:
     image: butomo1989/docker-android-x86-7.1.1
     container_name: android-container
     privileged: true
@@ -43,8 +43,9 @@ services:
       - "5555:5555"
       - "4723:4723"
     environment:
-      - WEB_VNC=true
+      - DEVICE=Nexus 5
       - APPIUM=true
+      - WEB_VNC=true
     volumes:
       - /home/vardan/wishlist.apk:/root/tmp/wishlist.apk
     restart: unless-stopped
