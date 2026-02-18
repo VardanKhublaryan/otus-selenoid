@@ -34,7 +34,7 @@ services:
         - selenoid_net1
 
   android-container:
-    image: cndaqiang/docker-android-emulator:api-33arm64v8a
+    image: butomo1989/docker-android-arm-7.1.1
     container_name: android-container
     privileged: true
     ports:
@@ -43,7 +43,7 @@ services:
       - "5555:5555"
       - "4723:4723"
     environment:
-      - DEVICE=Nexus 5
+      - DEVICE=Samsung Galaxy S6
       - APPIUM=true
       - WEB_VNC=true
     volumes:
