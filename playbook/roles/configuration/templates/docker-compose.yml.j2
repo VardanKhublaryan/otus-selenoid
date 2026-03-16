@@ -19,8 +19,6 @@ services:
     hostname: jenkins
     privileged: true
     restart: always
-    ports:
-      - 6060:6060
     user: root
     depends_on:
       - registry
