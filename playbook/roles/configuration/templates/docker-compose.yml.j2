@@ -1,5 +1,37 @@
 services:
 
+ registry:
+    image: registry:latest
+    restart: always
+    ports:
+      - 5005:5005
+    volumes:
+      - /vardan/otus-jenkins/registry:/var/lib/registry
+    hostname: registry
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:5005
+    networks:
+      - selenoid_net1
+
+  jenkins:
+    image: jenkins/jenkins:2.522-jdk21
+    hostname: jenkins
+    privileged: true
+    restart: always
+    user: root
+    depends_on:
+      - registry
+    environment:
+      - JAVA_OPTS=-Dhudson.model.DownloadService.noSignatureCheck=true
+      - DOCKER_OPTS=-H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - JENKINS_OPTS=--prefix=/jenkins
+    volumes:
+      - /vardan/otus-jenkins/jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - selenoid_net1
+
   selenoid1:
     image: aerokube/selenoid:1.11.3
     container_name: selenoid1
