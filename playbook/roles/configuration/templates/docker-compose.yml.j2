@@ -10,6 +10,7 @@ services:
     hostname: registry
     environment:
       - REGISTRY_HTTP_ADDR=0.0.0.0:5005
+      - OTEL_TRACES_EXPORTER=none
     networks:
       - selenoid_net1
 
