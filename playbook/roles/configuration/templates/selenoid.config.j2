@@ -4,6 +4,10 @@ upstream selenoid_ui {
     server selenoid-ui;
 }
 
+ upstream jenkins_up {
+    server jenkins:6060;
+}
+
 server {
     listen 80 default_server;
 
@@ -54,7 +58,6 @@ server {
     location /events {
         proxy_pass http://selenoid_ui;
     }
-
 
     location ~ /vnc/ {
         proxy_pass http://selenoid_ui;
