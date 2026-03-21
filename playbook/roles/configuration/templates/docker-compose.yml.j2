@@ -37,6 +37,8 @@ services:
 
   selenoid1:
     image: aerokube/selenoid:1.11.3
+    environment:
+      - DOCKER_API_VERSION=1.44
     container_name: selenoid1
     hostname: selenoid1
     networks:
@@ -48,6 +50,8 @@ services:
 
   selenoid2:
     image: aerokube/selenoid:1.11.3
+    environment:
+      - DOCKER_API_VERSION=1.44
     container_name: selenoid2
     hostname: selenoid2
     networks:
